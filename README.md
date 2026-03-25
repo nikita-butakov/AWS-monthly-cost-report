@@ -38,19 +38,21 @@ Google Sheets API
 ### 1. Build deployment package (Linux)
 
 Run container:
+```
 docker run -it --rm \
   --entrypoint /bin/bash \
   -v "$PWD":/var/task \
   public.ecr.aws/lambda/python:3.11
+```
 
 Install dependencies inside container:
-pip install gspread google-auth -t /var/task
+```pip install gspread google-auth -t /var/task```
 
 Exit container:
-exit
+```exit```
 
 Create ZIP archive:
-zip -r ../lambda.zip .
+```zip -r ../lambda.zip .```
 
 ---
 
