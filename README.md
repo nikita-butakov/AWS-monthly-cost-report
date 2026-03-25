@@ -62,6 +62,8 @@ Create ZIP archive:
 - Architecture: x86_64  
 - Upload: .zip archive  
 
+![Lambda](screenshots/lambda.JPG)
+![Lambda](screenshots/lambda1.JPG)
 ---
 
 ### 3. Environment Variables
@@ -71,6 +73,7 @@ Set in Lambda:
 GOOGLE_CREDS = <JSON content>  
 SPREADSHEET_ID = <your spreadsheet ID>  
 
+![Lambda](screenshots/lambda2.JPG)
 ---
 
 ### 4. Test
@@ -80,16 +83,23 @@ Create test event:
 
 Run the function.
 
+![Lambda](screenshots/lambda3.JPG)
 ---
 
 ## ⚠️ Notes
 
-- Increase Lambda timeout (e.g. 30 seconds)  
-- Ensure correct IAM role is attached (with Cost Explorer access)  
+![Lambda](screenshots/lambda4.JPG)
+
+- Increase Lambda timeout (e.g. 30 seconds)
+![Lambda](screenshots/lambda5.JPG) 
+- Ensure correct IAM role is attached (with Cost Explorer access)
+![Lambda](screenshots/lambda6.JPG)  
 - Make sure the spreadsheet is shared with the service account  
 
 ---
 
 ## ✅ Result
 
+![Lambda](screenshots/lambda7.JPG)
 After execution, the previous month's AWS cost data will appear in the Google Sheet.
+![Lambda](screenshots/lambda8.JPG)
