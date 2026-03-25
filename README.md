@@ -1,5 +1,11 @@
 # 📊 AWS Cost Report → Google Sheets
 
+## 🚀 Overview
+
+This project collects AWS monthly cost data and automatically writes it to Google Sheets.
+
+---
+
 ## Google Sheets Setup
 
 ### 1. Create Spreadsheet
@@ -38,7 +44,7 @@ Google Sheets API
 ### 1. Build deployment package (Linux)
 
 Run container:
-```
+```bash
 docker run -it --rm \
   --entrypoint /bin/bash \
   -v "$PWD":/var/task \
@@ -46,60 +52,83 @@ docker run -it --rm \
 ```
 
 Install dependencies inside container:
-```pip install gspread google-auth -t /var/task```
+```bash
+pip install gspread google-auth -t /var/task
+```
 
 Exit container:
-```exit```
+```bash
+exit
+```
 
 Create ZIP archive:
-```zip -r ../lambda.zip .```
+```bash
+zip -r ../lambda.zip .
+```
 
 ---
 
 ### 2. Create Lambda function
 
-- Runtime: Python 3.11  
-- Architecture: x86_64  
-- Upload: .zip archive  
+- Runtime: **Python 3.11**  
+- Architecture: **x86_64**  
+- Upload: `.zip` archive  
 
 ![Lambda](screenshots/lambda.JPG)
 ![Lambda](screenshots/lambda1.JPG)
+
 ---
 
 ### 3. Environment Variables
 
 Set in Lambda:
 
-GOOGLE_CREDS = <JSON content>  
-SPREADSHEET_ID = <your spreadsheet ID>  
+```
+GOOGLE_CREDS = <JSON content>
+SPREADSHEET_ID = <your spreadsheet ID>
+```
 
 ![Lambda](screenshots/lambda2.JPG)
+
 ---
 
 ### 4. Test
 
 Create test event:
+```json
 {}
+```
 
 Run the function.
 
 ![Lambda](screenshots/lambda3.JPG)
+
 ---
 
 ## ⚠️ Notes
 
-![Lambda](screenshots/lambda4.JPG)
+- Increase Lambda timeout (e.g. 30 seconds)  
+![Timeout](screenshots/lambda4.JPG)
 
-- Increase Lambda timeout (e.g. 30 seconds)
-![Lambda](screenshots/lambda5.JPG) 
-- Ensure correct IAM role is attached (with Cost Explorer access)
-![Lambda](screenshots/lambda6.JPG)  
+- Ensure correct IAM role is attached (with Cost Explorer access)  
+![IAM](screenshots/lambda6.JPG)
+
 - Make sure the spreadsheet is shared with the service account  
 
 ---
 
 ## ✅ Result
 
-![Lambda](screenshots/lambda7.JPG)
 After execution, the previous month's AWS cost data will appear in the Google Sheet.
-![Lambda](screenshots/lambda8.JPG)
+
+![Result](screenshots/lambda7.JPG)
+![Result](screenshots/lambda8.JPG)
+
+---
+
+## 🔄 Scheduling (optional)
+
+You can configure an EventBridge rule to run the Lambda automatically (e.g. once per week or once per month).
+
+Running the function multiple times will not create duplicate records —  
+new data will only be added when a new month appears.
