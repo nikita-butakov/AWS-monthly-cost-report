@@ -67,6 +67,14 @@ zip -r ../lambda.zip .
 ```
 
 ---
+## IAM Role
+
+Create a Lambda execution role (e.g. `Lambda_Cost_Report_Role`)
+
+Attach the following AWS managed policies:
+
+- `AWSLambdaBasicExecutionRole`
+- `AWSBillingReadOnlyAccess`
 
 ### 2. Create Lambda function
 
